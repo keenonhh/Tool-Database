@@ -1,0 +1,64 @@
+h1, h2, ul, li, label, form, select, option {
+	font-family: "Courier New", monospace;
+	text-align: center;
+	list-style: none;
+}	
+.description p {
+	font-family: "Courier New", monospace;
+	text-align: center;	
+}
+
+.description ul{
+	font-family: "Courier New", monospace;
+	text-align: left;
+	list-style: none;
+	margin-left: 200px
+}
+
+.description li {
+	font-family: "Courier New", monospace;
+	text-align: left;
+	list-style: none;	
+}
+
+body {
+	margin: auto;
+	padding: 0;
+	font-family: "Courier New", monospace;
+	text-align: center;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.myMenu ul{
+	font-family: "Courier New", monospace;
+	text-align: center;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+.myMenu li {
+	display: inline;
+}	
+
+.myMenu a {
+	display:inline-block;
+	color: white;
+	padding:14px 16px;
+	text-decoration:none;
+	
+}
+
+.myMenu li a:hover{
+	background-color: #5298d9;
+}	
+
+.dropdown {
+	color:black;
+}

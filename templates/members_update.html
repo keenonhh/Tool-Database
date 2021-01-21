@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Update Band Members</title>
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename= 'css/style.css')}}" />
+  </head>
+  <body>
+ <h1>Update Band Members</h1>
+<nav class = "myMenu">
+		<ul>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/">Home</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/set_list">Set Lists</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/shows">Shows</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/album">Albums</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/track">Tracks</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/band_members">Band Members</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/track_contributors">Track Contributors</a></li>
+		</ul>
+	</nav>
+<br>
+<table style="width:75%" table border="1" table align = "center">
+  <thead>
+	<th>Band Member ID</th>
+    <th>Name</th>
+    <th>Instrument</th>
+    <th>Birthdate</th>
+  </thead>
+  <tbody>
+	{% for r in row %}
+	<tr>
+		<td>{{r.0}}</td>
+		<td>{{r[1]}}</td>
+		<td>{{r[2]}}</td>
+		<td>{{r[3]}}</td>
+	</tr>
+		{% endfor %}
+	</tbody>
+</table>	
+<br>
+<form method="POST" action="/update_member/{{member.0}}">
+    <input type="hidden" name="member_id" value = "{{member.0}}">
+	Band Member Name <input type="text" name="member_name" value = "{{member[1]}}" required />
+    <br>
+    Instrument <input type="text" name="instrument" value = "{{member[2]}}" required />
+	<br>
+	Birthdate <input type="date" name="birthdate" value = "{{member[3]}}" required />
+	<br>
+	<input type="submit">
+  </form>
+ </body>
+ <html>
