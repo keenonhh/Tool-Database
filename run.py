@@ -1,4 +1,5 @@
 #run the specified app
-from myserver import app
+from toolDB import app
 
-
+if __name__ == '__main__':
+    app.run(debug=True)

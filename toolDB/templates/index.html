@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Home </title>
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename= 'css/style.css')}}" />
+  </head>
+  <body>
+	<h1>Tool Database</h1>
+	<br>
+	<nav class = "myMenu">
+		<ul>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/">Home</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/set_list">Set Lists</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/shows">Shows</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/album">Albums</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/track">Tracks</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/band_members">Band Members</a></li>
+			<li><a href="http://flip3.engr.oregonstate.edu:3975/track_contributors">Track Contributors</a></li>
+		</ul>
+	</nav>	
+	<br>
+	<nav class = "description">
+	<p> Welcome to our database for the band Tool!
+		Tool is an progressive metal band from Los Angeles, formed in 1990.
+		The band is made up of vocalist Maynard James Keenan, guitarist Adam Jones,
+		drummer Danny Carey and bassist Justin Chancellor.
+	</p>
+	<ul>
+		<li><b>Home</b> - this will return you to this page</li>
+		<li><b>Set Lists</b> - this is where you can insert, edit or delete the line up of the band's set lists which they play at their shows</li>
+		<li><b>Shows</b> - this is where you can insert, edit or delete a show played by the band</li>
+		<li><b>Albums</b> - this is where you can insert, edit or delete details about one of the band's albums</li>
+		<li><b>Tracks</b> - this is where you can search, insert, edit or delete tracks on one of the band's albums</li>
+		<li><b>Band Members</b> - this is where you can insert, edit or delete details about the individual band members</li>
+		<li><b>Track Contributors</b> - this is where you can edit or delete details about which band members contributed to which tracks</li>
+	</ul>
+	</nav>
+	<br>
+	<img src= "/static/images/tool-band-eye-tattoo.jpg">
+	<br>
+  </body>
+</html>
