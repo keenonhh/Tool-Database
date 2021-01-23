@@ -4,18 +4,19 @@ from toolDB import db
 
 # Table of Tool albums
 class Album(db.Model):
-    # primary key of table
+    # primary key of table  
     id = db.Column(db.Integer, primary_key=True)
 
     # album info
     album_name = db.Column(db.String, nullable=False)
     release_date = db.Column(db.String, nullable=False)
     
-    # there is a relationship which is albums contain many tracks
-    # and tracks come from a single album
+    # there is a relationship which is album contains many tracks
+    # and tracks come from a single album (many to one)
     track = db.relationship('Track', backref='album', lazy=True)
 
-    # relationship between setlist and track
+    # relationship between setlist and album
+    # Each setlist is from one album (one to one(or none))
     set_list_album = db.relationship('SetList', backref='album', lazy=True)
 
     # display the album info
@@ -35,7 +36,7 @@ class Track(db.Model):
     # are on which album
     album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=False)
 
-    # there is a relationship which band member(s) wrote wich tracks
+    # there is a relationship which band member(s) wrote which tracks (many to many)
     member_track = db.relationship('Member', secondary='trackBandMember', backref='track', lazy=True)
 
     # relationship between setlist and track
@@ -49,7 +50,7 @@ class Member(db.Model):
     # primary key
     id = db.Column(db.Integer, primary_key=True)
 
-    # track info
+    # band member info
     member_name = db.Column(db.String, nullable=False)
     instrument = db.Column(db.String, nullable=False)
     birthdate = db.Column(db.String, nullable=False)
@@ -80,10 +81,10 @@ class Shows(db.Model):
 class SetList(db.Model):
     # primary key
     id = db.Column(db.Integer, primary_key=True)
-
+    
     set_list_id = db.Column(db.Integer, nullable=False)
 
-    # track info
+    # setlist info
     album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=False)
     track_id = db.Column(db.Integer, db.ForeignKey('track.id'), nullable=False)
 
