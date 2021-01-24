@@ -1,46 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Track Contributors</title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename= 'css/style.css')}}" />
-  </head>
-  <body>
- <h1>Track Contributors Table </h1>
-<nav class = "myMenu">
-		<ul>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/">Home</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/set_list">Set Lists</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/shows">Shows</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/album">Albums</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track">Tracks</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/band_members">Band Members</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track_contributors">Track Contributors</a></li>
-		</ul>
-	</nav>
-<br>	
-<table style="width:75%" table border="1" table align = "center">
-  <thead>
-    <th>Track ID</th>
-	<th>Track Name</th>
-    <th>Band Member ID</th>
-	<th>Band Member Name</th>
-    <th>Delete</th>
-  </thead>
-   <tbody>
-	{% for r in rows %}
-	<tr>
-		<td>{{r[1]}}</td>
-		<td>{{r[2]}}</td>
-		<td>{{r[3]}}</td>
-		<td>{{r[4]}}</td>
-		<td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_contributor/{{r.0}}'"></td>
-	</tr>
-		{% endfor %}
-</tbody>
-</table>
-<br>
-<br>
-<a href="http://flip3.engr.oregonstate.edu:3975/add_track_contributors"><button type="button">Add</button></a>
-<br>
-<br>
- </body>
+{% extends "layout.html" %}
+{% block content %}
+	<table style="width:75%" table border="1" table align = "center">
+		<thead>
+		  <th>Track ID</th>
+		  <th>Track Name</th>
+		  <th>Band Member ID</th>
+		  <th>Band Member Name</th>
+		  <th>Delete</th>
+		</thead>
+		<tbody>
+		  {% for r in rows %}
+		  	<tr>
+				<td>{{ r.track_id }}</td>
+				<td>{{ r.album_id }}</td>
+				<td>{{ r[3] }}</td>
+				<td>{{ r[4] }}</td>
+				<td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_contributor/{{r.0}}'"></td>
+		  	</tr>
+		  {% endfor %}
+		</tbody>
+	</table>
+	<br>
+	<br>
+	<a href="http://flip3.engr.oregonstate.edu:3975/add_track_contributors"><button type="button">Add</button></a>
+	<br>
+	<br>
+{% endblock content %}

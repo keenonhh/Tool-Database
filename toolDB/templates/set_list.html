@@ -1,47 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Set List</title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename= 'css/style.css')}}" />
-  </head>
-  <body>
- <h1>Set List Table</h1>
-<nav class = "myMenu">
-		<ul>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/">Home</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/set_list">Set Lists</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/shows">Shows</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/album">Albums</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track">Tracks</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/band_members">Band Members</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track_contributors">Track Contributors</a></li>
-		</ul>
-	</nav>
-<br>		
-<table style="width:75%" table border="1" table align = "center">
-  <thead>
-    <th>Line Up ID</th>
-	<th>Show City</th>
-    <th>Track ID</th>
-	<th>Track Name</th>
-    <th>Edit</th>
-    <th>Delete</th>
-  </thead>
-  <tbody>
-	{% for r in rows %}
-	<tr>
-		<td>{{r[1]}}</td>
-		<td>{{r[2]}}</td>
-		<td>{{r[3]}}</td>
-		<td>{{r[4]}}</td>
-		<td><input type="button" name = "Edit" value = "Edit" onclick = "window.location='/update_set_list/{{r.0}}'"></td>
-		<td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_set_list/{{r.0}}'"></td>
-  </tr>
-	{% endfor %}
-</tbody>
-</table>
-<br>
-<br>
-<a href="http://flip3.engr.oregonstate.edu:3975/add_set_list"><button type="button">Add</button></a>
- </body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+	<table style="width:75%" tableborder="1" tablealign = "center">
+		<thead>
+		  <th>Line Up ID</th>
+		  <th>Show City</th>
+		  <th>Track ID</th>
+		  <th>Track Name</th>
+		  <th>Edit</th>
+		  <th>Delete</th>
+		</thead>
+		<tbody>
+		  {% for r in rows %}
+		  	<tr>
+			  <td>{{r.set_list_id}}</td>
+			  <td>{{r.city}}</td>
+			  <td>{{r.track.id}}</td>
+			  <td>{{r.track_name}}</td>
+			  <td><input type="button" name = "Edit" value = "Edit" onclick = "window.location='/update_set_list/{{ r.id }}'"></td>
+			  <td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_set_list/{{ r.id }}'"></td>
+			</tr>
+		  {% endfor %}
+		</tbody>
+	</table>
+	<br>
+	<br>
+	<a href="http://flip3.engr.oregonstate.edu:3975/add_set_list"><button type="button">Add</button></a>  
+{% endblock content %}

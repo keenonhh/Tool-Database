@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+	<table style="width:75%" tableborder="1" tablealign = "center">
+		<thead>
+		  <th>Band Member ID</th>
+		  <th>Name</th>
+		  <th>Instrument</th>
+		  <th>Birthdate</th>
+		  <th>Edit</th>
+		  <th>Delete</th>
+		</thead>
+		<tbody>
+			{% for r in rows %}
+		  		<tr>
+					<td>{{ r.id }}</td>
+					<td>{{ r.member_name }}</td>
+					<td>{{ r.instrument }}</td>
+					<td>{{ r.birthdate }}</td>
+					<td><input type="button" name = "Edit" value = "Edit" onclick = "window.location='/update_member/{{ r.id }}'"></td>
+					<td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_member/{{ r.id }}'"></td>
+		  		</tr>
+			{% endfor %}
+		</tbody>
+	</table>	
+	<br>
+	<br>	
+	<a href="http://flip3.engr.oregonstate.edu:3975/add_band_members"><button type="button">Add</button></a>
+{% endblock content %}

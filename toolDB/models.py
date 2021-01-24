@@ -81,7 +81,7 @@ class Shows(db.Model):
 class SetList(db.Model):
     # primary key
     id = db.Column(db.Integer, primary_key=True)
-    
+
     set_list_id = db.Column(db.Integer, nullable=False)
 
     # setlist info

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename= 'css/style.css')}}" />
+
+  {% if title %}
+    <title>{{ title }}</title>
+  {% else %}
+    <title>Tool Database</title>
+  {% endif %}
+</head>
+<body>
+  {% if table_name %}
+    <h1> {{ table_name }} </h1>
+  {% else %}
+    <h1>Tool Database</h1>
+  {% endif %}
+    <nav class = "myMenu">
+        <ul>
+        	<li><a href="http://flip3.engr.oregonstate.edu:3975/">Home</a></li>
+        	<li><a href="http://flip3.engr.oregonstate.edu:3975/set_list">Set Lists</a></li>
+        	<li><a href="http://flip3.engr.oregonstate.edu:3975/shows">Shows</a></li>
+        	<li><a href="http://flip3.engr.oregonstate.edu:3975/album">Albums</a></li>
+        	<li><a href="http://flip3.engr.oregonstate.edu:3975/track">Tracks</a></li>
+        	<li><a href="http://flip3.engr.oregonstate.edu:3975/band_members">Band Members</a></li>
+        	<li><a href="http://flip3.engr.oregonstate.edu:3975/track_contributors">Track Contributors</a></li>
+        </ul>
+    </nav>
+    <br>
+    {% block content %}{% endblock %}
+</body>

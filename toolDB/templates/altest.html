@@ -11,9 +11,9 @@
     <tbody>
   	  {% for r in rows %}
   	    <tr>
-        	<td>{{ r.id }}</td>
-        	<td>{{ r.album_name }}</td>
-        	<td>{{ r.release_date }}</td>
+          <td>{{ r.id }}</td>
+          <td>{{ r.album_name }}</td>
+          <td>{{ r.release_date }}</td>
   	    	<td><input type="button" name = "Edit" value = "Edit" onclick = "window.location='/update_album/{{r.0}}'"></td>
   	    	<td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_album/{{r.0}}'"></td>
   	    </tr>
