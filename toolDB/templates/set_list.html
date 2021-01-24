@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-	<table style="width:75%" tableborder="1" tablealign = "center">
+	<table style="width:75%" table border="1" table align = "center">
 		<thead>
 		  <th>Line Up ID</th>
 		  <th>Show City</th>
@@ -12,10 +12,10 @@
 		<tbody>
 		  {% for r in rows %}
 		  	<tr>
-			  <td>{{r.set_list_id}}</td>
-			  <td>{{r.city}}</td>
-			  <td>{{r.track.id}}</td>
-			  <td>{{r.track_name}}</td>
+			  <td>{{ r[1] }}</td>
+			  <td>{{ r[2] }}</td>
+			  <td>{{ r[3] }}</td>
+			  <td>{{ r[4] }}</td>
 			  <td><input type="button" name = "Edit" value = "Edit" onclick = "window.location='/update_set_list/{{ r.id }}'"></td>
 			  <td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_set_list/{{ r.id }}'"></td>
 			</tr>

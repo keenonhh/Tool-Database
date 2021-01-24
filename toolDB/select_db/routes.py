@@ -33,19 +33,15 @@ def band_members():
 def shows():
     rows = Shows.query.all()  
     return render_template('shows.html', title='Shows', table_name='Shows', rows=rows)
-
-### need to perform joins to get track name and city name 
+ 
 #renders the set list page and displays the set list table, along with the corresponding columns from the shows and tracks table, from the back-end database
 @select.route('/set_list')
 def set_list():
-    rows = SetList.query.all()  
+    rows = db.session.execute('SELECT set_list.id, set_list.set_list_id, shows.city, set_list.track_id, track.track_name FROM set_list JOIN shows ON set_list.set_list_id = shows.set_list_id JOIN track ON set_list.track_id = track.id;')
     return render_template('set_list.html', title='SetList', table_name='Set List table', rows=rows)
 
-
-
-## need to perform joins to get member names/IDs
 #renders the track contributors page and displays the track band members table, along with the corresponding columns from the tracks and band members tables, from the back-end database 
 @select.route('/track_contributors')
 def track_contributors():
-    rows = Track.query.join(trackBandMember).join(Member).filter((trackBandMember.c.track_id == Track.id) & (trackBandMember.c.member_id == Member.id)).all()
+    rows = db.session.execute('SELECT trackBandMember.id, trackBandMember.track_id, track.track_name, trackBandMember.member_id, member.member_name FROM trackBandMember JOIN track ON trackBandMember.track_id = track.id JOIN member ON trackBandMember.member_id = member.id;')
     return render_template('track_contributors.html', title='Track Contributors', table_name='Track Contributors', rows=rows)

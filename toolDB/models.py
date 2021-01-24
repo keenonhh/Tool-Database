@@ -61,6 +61,7 @@ class Member(db.Model):
 # associative table between tracks and members that represents 
 # the many to many relationship
 trackBandMember = db.Table('trackBandMember',
+    db.Column('id', db.Integer, primary_key=True),
     db.Column('track_id', db.Integer, db.ForeignKey('track.id')),
     db.Column('member_id', db.Integer, db.ForeignKey('member.id'))
 )
