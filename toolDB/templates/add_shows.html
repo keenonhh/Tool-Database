@@ -1,27 +1,34 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Add a Show</title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename= 'css/style.css')}}" />
-  </head>
-  <body>
- <h1>Add a Show </h1>
-<nav class = "myMenu">
-		<ul>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/">Home</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/set_list">Set Lists</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/shows">Shows</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/album">Albums</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track">Tracks</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/band_members">Band Members</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track_contributors">Track Contributors</a></li>
-		</ul>
-	</nav>
-<br>
-<form method="POST" action="add_shows_new">
-	City <input type="text" name="city" required />
-    <br>
-    <input type="submit">
+{% extends "layout.html" %}
+{% block content %}
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class='form-control'>
+      {{ form.city.label }}
+      {% if form.city.errors %}
+        {{ form.city }}
+        <ul class=errors>
+        {% for error in form.city.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        {{ form.city }}
+      {% endif %}
+    </div>
+    
+    <div class='form-control'>
+      {{ form.set_list_id.label }}
+      {% if form.set_list_id.errors %}
+        {{ form.set_list_id }}
+        <ul class=errors>
+        {% for error in form.set_list_id.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        {{ form.set_list_id }}
+      {% endif %}
+    </div>
+    {{ form.submit() }}
   </form>
- </body>
- <html>
+{% endblock content %}

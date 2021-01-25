@@ -10,8 +10,8 @@
   {% endif %}
 </head>
 <body>
-  {% if table_name %}
-    <h1> {{ table_name }} </h1>
+  {% if header %}
+    <h1> {{ header }} </h1>
   {% else %}
     <h1>Tool Database</h1>
   {% endif %}
@@ -27,5 +27,14 @@
         </ul>
     </nav>
     <br>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for category, message in messages %}
+          <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
     {% block content %}{% endblock %}
 </body>

@@ -62,3 +62,21 @@ img {
 .dropdown {
 	color:black;
 }
+
+.success {
+	margin: auto;
+	width: 30%;
+	background-color: rgb(67, 182, 67);
+}
+
+.errors {
+	margin: auto;
+	width: 30%;
+	background-color: rgb(175, 37, 37);
+}
+
+.form-control {
+	position : relative;
+  	margin : auto;
+  	padding: 1em;
+}

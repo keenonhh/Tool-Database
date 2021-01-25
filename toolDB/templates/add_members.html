@@ -1,31 +1,48 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Add a Band Member</title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename= 'css/style.css')}}" />
-  </head>
-  <body>
- <h1>Add a Band Member </h1>
-<nav class = "myMenu">
-		<ul>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/">Home</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/set_list">Set Lists</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/shows">Shows</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/album">Albums</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track">Tracks</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/band_members">Band Members</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track_contributors">Track Contributors</a></li>
-		</ul>
-	</nav>
-<br>	
-<form method="POST" action="/add_members_new">
-    Member Name <input type="text" name="Member_Name" required />
-    <br>
-    Instrument <input type="text" name="Instrument" required />
-    <br>
-    Birthdate <input type="date" name="Birthdate" required />
-    <br>
-    <input type="submit">
+{% extends "layout.html" %}
+{% block content %}
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class='form-control'>
+      {{ form.member_name.label }}
+      {% if form.member_name.errors %}
+        {{ form.member_name }}
+        <ul class=errors>
+        {% for error in form.member_name.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        {{ form.member_name }}
+      {% endif %}
+    </div>
+    
+    <div class='form-control'>
+      {{ form.instrument.label }}
+      {% if form.instrument.errors %}
+        {{ form.instrument }}
+        <ul class=errors>
+        {% for error in form.instrument.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        {{ form.instrument }}
+      {% endif %}
+    </div>
+
+    <div class='form-control'>
+      {{ form.birthdate.label }}
+      {% if form.birthdate.errors %}
+        {{ form.birthdate }}
+        <ul class=errors>
+        {% for error in form.birthdate.errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        {{ form.birthdate }}
+      {% endif %}
+    </div>
+    {{ form.submit() }}
   </form>
- </body>
- <html>
+{% endblock content %}
