@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, SubmitField, FloatField
+from wtforms import StringField, IntegerField, SubmitField, FloatField, SelectField
 from wtforms.validators import DataRequired, Length, NumberRange
 from toolDB.models import Album, Track, Member, Shows, SetList, trackBandMember
 
@@ -16,8 +16,7 @@ class AddTrackForm(FlaskForm):
     album_id = IntegerField('Album ID', validators=[DataRequired(), NumberRange(min=Album.query.first().id, max=Album.query.order_by(Album.id.desc()).first().id)])
     submit = SubmitField('Add Track')
 
-
-class AddTrackForm(FlaskForm):
+class AddMemberForm(FlaskForm):
     member_name = StringField('Member Name', validators=[DataRequired(), Length(min=2, max=20)])
     instrument = StringField('Instrument', validators=[DataRequired(), Length(min=2, max=20)])
     birthdate = StringField('Birthdate', validators=[DataRequired(), Length(min=2, max=20)])
@@ -27,3 +26,8 @@ class AddShowForm(FlaskForm):
     city = StringField('City', validators=[DataRequired(), Length(min=2, max=20)])
     set_list_id = IntegerField('Set List ID', validators=[DataRequired()])
     submit = SubmitField('Add Show')
+
+class AddSetList(FlaskForm):
+    city = SelectField('City', validators=[DataRequired()])
+    track_name = SelectField('Track Name', validators=[DataRequired()])
+    submit = SubmitField('Add Set List')

@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-	<table style="width:75%" tableborder="1" tablealign = "center">
+	<table style="width:75%" table border="1" table align = "center">
 		<thead>
 		  <th>Band Member ID</th>
 		  <th>Name</th>
@@ -24,5 +24,5 @@
 	</table>	
 	<br>
 	<br>	
-	<a href="http://flip3.engr.oregonstate.edu:3975/add_band_members"><button type="button">Add</button></a>
+	<a href="{{ url_for('insert.add_band_members') }}"><button type="button">Add</button></a>
 {% endblock content %}

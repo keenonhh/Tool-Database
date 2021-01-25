@@ -2,7 +2,7 @@
 {% block content %}	
 	<table style="width:75%" table border="1" table align = "center">
 	  <thead>
-	    <th>Line Up ID</th>
+	    <th>Set List ID</th>
 	    <th>City</th>
 	    <th>Edit</th>
 	    <th>Delete</th>
@@ -20,5 +20,5 @@
 	</table>
 	<br>
 	<br>
-	<a href="http://flip3.engr.oregonstate.edu:3975/add_shows"><button type="button">Add</button></a>
+	<a href="{{ url_for('insert.add_shows') }}"><button type="button">Add</button></a>
 {% endblock content %}

@@ -1,26 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title> Home </title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename= 'css/style.css')}}" />
-  </head>
-  <body>
-	<h1>Tool Database</h1>
-	<br>
-	<nav class = "myMenu">
-		<ul>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/">Home</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/set_list">Set Lists</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/shows">Shows</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/album">Albums</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track">Tracks</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/band_members">Band Members</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track_contributors">Track Contributors</a></li>
-		</ul>
-	</nav>	
-	<br>
+{% extends "layout.html" %}
+{% block content %}
 	<nav class = "description">
-	<p> Welcome to our database for the band Tool!
+	<p> 
+		Welcome to our database for the band Tool!
 		Tool is an progressive metal band from Los Angeles, formed in 1990.
 		The band is made up of vocalist Maynard James Keenan, guitarist Adam Jones,
 		drummer Danny Carey and bassist Justin Chancellor.
@@ -38,5 +20,4 @@
 	<br>
 	<img src= "/static/images/tool-band-eye-tattoo.jpg">
 	<br>
-  </body>
-</html>
+{% endblock content %}

@@ -1,36 +1,35 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Add a Set List</title>
-    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static', filename= 'css/style.css')}}" />
-  </head>
-  <body>
- <h1>Add to a Set List</h1>
-<nav class = "myMenu">
-		<ul>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/">Home</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/set_list">Set Lists</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/shows">Shows</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/album">Albums</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track">Tracks</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/band_members">Band Members</a></li>
-			<li><a href="http://flip3.engr.oregonstate.edu:3975/track_contributors">Track Contributors</a></li>
-		</ul>
-	</nav>
-<br>	
-<form method="POST" action="/add_set_list_new">
-	City <select name="lineup_id">
-       {% for l in lineup_id %}
-         <option value="{{l[0]}}">{{l[1]}}</option>
-       {% endfor %}
-	</select><br>
-	Track Name <select name="track_id">
-       {% for t in track_id %}
-         <option value="{{t[0]}}">{{t[1]}}</option>
-       {% endfor %}
-	</select><br>
-	<br>
-    <input type="submit">
+{% extends "layout.html" %}
+  {% block content %}
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class='form-control'>
+      {{ form.city.label }}
+      {{ form.city }}
+    </div>
+
+    <div class='form-control'>
+      {{ form.track_name.label }}
+      {{ form.track_name }}
+    </div>
+    {{ form.submit() }}
   </form>
- </body>
- <html>
+{% endblock content %}
+
+
+
+<!-- 
+<form method="POST" action="/add_set_list_new">
+  City <select name="lineup_id">
+     {% for l in lineup_id %}
+       <option value="{{l[1]}}">{{l[1]}}</option>
+     {% endfor %}
+    </select><br>
+  Track Name <select name="track_id">
+     {% for t in track_id %}
+       <option value="{{t[0]}}">{{t[1]}}</option>
+     {% endfor %}
+</select><br>
+<br>
+  <input type="submit">
+</form>
+ -->
