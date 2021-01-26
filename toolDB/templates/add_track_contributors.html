@@ -1,16 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
-<form method="POST" action="/add_track_contributors_new">
-	Track Name <select name="track_id">
-       {% for n in track_name %}
-         <option value="{{n[0]}}">{{n[1]}}</option>
-       {% endfor %}
-	</select><br>
-	 Band Member Name <select name="Band_Member_ID" >
-		{% for a in members_name %}	
-			<option class = "dropdown" value = "{{a[0]}}">{{a[1]}}</option>
-		{% endfor %}
-	</select><br>
-	<input type="submit">	
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <div class='form-control'>
+      {{ form.track_name.label }}
+      {{ form.track_name }}
+    </div>
+
+    <div class='form-control'>
+      {{ form.member.label }}
+      {{ form.member }}
+    </div>
+    {{ form.submit() }}
   </form>
 {% endblock content %}

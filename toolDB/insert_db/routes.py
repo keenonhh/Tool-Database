@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint, redirect, url_for, flash
-from toolDB.insert_db.forms import AddAlbumForm, AddTrackForm, AddMemberForm, AddShowForm, AddSetList
+from toolDB.insert_db.forms import AddAlbumForm, AddTrackForm, AddMemberForm, AddShowForm, AddSetList, AddTrackContributor
 from toolDB import db
 from toolDB.models import Album, Track, Member, Shows, SetList, trackBandMember
 
@@ -73,16 +73,16 @@ def add_shows():
 @insert.route('/add_set_list', methods=['GET','POST'])
 def add_set_list():
     form = AddSetList()
+    
     # populate the list of choices with the cities and tracks availalbe
-    form.city.choices = [(show.id, show.city) for show in Shows.query.with_entities(Shows.city).all()]
-    form.track_name.choices = [(track.id, track.track_name) for track in Track.query.with_entities(Track.track_name).all()]
+    form.city.choices = [(show.set_list_id, show.city) for show in Shows.query.order_by('city')]
+    form.track_name.choices = [(track.id, track.track_name) for track in Track.query.order_by('track_name')]
 
     if form.validate_on_submit():
-        city = Shows(city=form.city.data)
-        track = Track(track_name=form.track_name.data)
+        # use the track id to get the album id so a new setlist can be added
+        set_list = SetList(set_list_id=form.city.data, track_id=form.track_name.data, album_id=Track.query.get(form.track_name.data).album_id)
         # add the user to database
-        db.session.add(city)
-        db.session.add(track)
+        db.session.add(set_list)
         db.session.commit()
         # success message 
         flash(f'Set list has been added!', 'success')
@@ -94,12 +94,23 @@ def add_set_list():
 #renders the add track contributor page which allows user to enter details about a new track contributor
 @insert.route('/add_track_contributors', methods=['GET','POST'])
 def add_track_contributors():
-#    db_connection = connect_to_database()
-#    query1 = 'SELECT `band member id`, `name` FROM `band members`';
-#    query2 = 'SELECT `track id`, `track name` FROM `tracks`';
-#    result_bm = execute_query(db_connection, query1).fetchall();
-#    result_track = execute_query(db_connection, query2).fetchall();
-    return render_template('add_track_contributors.html', title='Add Track Contributor', header='Add Track Contributor')
-#    return render_template('add_track_contributors.html', members_name = result_bm, track_name = result_track)   
-#
+    form = AddTrackContributor()
+
+    # populate the list of choices with the track names and member names
+    form.track_name.choices = [(track.id, track.track_name) for track in Track.query.order_by('track_name')]
+    form.member.choices = [(mem.id, mem.member_name) for mem in Member.query.order_by('member_name')]
+
+    if form.validate_on_submit():
+        # statement that will insert into many to many associative table
+        # track_id and member_name from form will be inserted upon execution and commit
+        track_contributor = trackBandMember.insert().values(track_id=form.track_name.data, member_id=form.member.data)
+        # add the user to database
+        db.session.execute(track_contributor)
+        db.session.commit()
+        # success message 
+        flash(f'Track Contributor has been added!', 'success')
+        # redirect to lifts page 
+        return redirect(url_for('select.track_contributors'))
+    return render_template('add_track_contributors.html', title='Add Track Contributor', header='Add Track Contributor', form=form)
+
   

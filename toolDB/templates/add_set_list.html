@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-  {% block content %}
+{% block content %}
   <form method="POST" action="">
     {{ form.hidden_tag() }}
     <div class='form-control'>
@@ -14,22 +14,3 @@
     {{ form.submit() }}
   </form>
 {% endblock content %}
-
-
-
-<!-- 
-<form method="POST" action="/add_set_list_new">
-  City <select name="lineup_id">
-     {% for l in lineup_id %}
-       <option value="{{l[1]}}">{{l[1]}}</option>
-     {% endfor %}
-    </select><br>
-  Track Name <select name="track_id">
-     {% for t in track_id %}
-       <option value="{{t[0]}}">{{t[1]}}</option>
-     {% endfor %}
-</select><br>
-<br>
-  <input type="submit">
-</form>
- -->

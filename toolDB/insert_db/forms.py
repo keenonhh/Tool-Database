@@ -24,10 +24,16 @@ class AddMemberForm(FlaskForm):
 
 class AddShowForm(FlaskForm):
     city = StringField('City', validators=[DataRequired(), Length(min=2, max=20)])
-    set_list_id = IntegerField('Set List ID', validators=[DataRequired()])
+    # only allow an user to add an existing setlist
+    set_list_id = IntegerField('Set List ID', validators=[DataRequired(), NumberRange(min=SetList.query.first().set_list_id, max=SetList.query.order_by(SetList.set_list_id.desc()).first().set_list_id)])
     submit = SubmitField('Add Show')
 
 class AddSetList(FlaskForm):
     city = SelectField('City', validators=[DataRequired()])
     track_name = SelectField('Track Name', validators=[DataRequired()])
     submit = SubmitField('Add Set List')
+
+class AddTrackContributor(FlaskForm):
+    track_name = SelectField('Track Name', validators=[DataRequired()])
+    member = SelectField('Band Member Name', validators=[DataRequired()])
+    submit = SubmitField('Add Track Contributor')
