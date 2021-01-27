@@ -13,8 +13,11 @@ db = SQLAlchemy(app)
 #import all the blueprints 
 from toolDB.select_db.routes import select
 from toolDB.insert_db.routes import insert
+from toolDB.delete_db.routes import delete
 
 # register all the blueprints
 app.register_blueprint(select)
 app.register_blueprint(insert)
+app.register_blueprint(delete)
+
 

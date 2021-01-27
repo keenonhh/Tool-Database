@@ -13,11 +13,7 @@ class Album(db.Model):
     
     # there is a relationship which is album contains many tracks
     # and tracks come from a single album (many to one)
-    track = db.relationship('Track', backref='album', lazy=True)
-
-    # relationship between setlist and album
-    # Each setlist is from one album (one to one(or none))
-    set_list_album = db.relationship('SetList', backref='album', lazy=True)
+    track = db.relationship('Track', cascade='all, delete', backref='album', lazy=True)
 
     # display the album info
     def __repr__(self):
@@ -40,7 +36,7 @@ class Track(db.Model):
     member_track = db.relationship('Member', secondary='trackBandMember', backref='track', lazy=True)
 
     # relationship between setlist and track
-    set_list_track = db.relationship('SetList', backref='track', lazy=True)
+    set_list_track = db.relationship('SetList', cascade='all, delete', backref='track', lazy=True)
 
     def __repr__(self):
         return f"track('{self.track_name}', '{self.track_length}')"
@@ -70,11 +66,11 @@ trackBandMember = db.Table('trackBandMember',
 class Shows(db.Model):
     # primary key
     id = db.Column(db.Integer, primary_key=True)
-
-    # track info
     city = db.Column(db.String, nullable=False)
-    set_list_id = db.Column(db.Integer, nullable=False)
     
+    # relationship between setlist and track
+    set_list_show = db.relationship('SetList', cascade='all, delete', backref='shows', lazy=True)
+
     def __repr__(self):
         return f"show('{self.city}', '{self.set_list_id}')"
 
@@ -83,10 +79,8 @@ class SetList(db.Model):
     # primary key
     id = db.Column(db.Integer, primary_key=True)
 
-    set_list_id = db.Column(db.Integer, nullable=False)
-
-    # setlist info
-    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=False)
+    #set list info
+    show_id = db.Column(db.Integer,db.ForeignKey('shows.id'), nullable=False)
     track_id = db.Column(db.Integer, db.ForeignKey('track.id'), nullable=False)
 
     def __repr__(self):

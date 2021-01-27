@@ -14,8 +14,8 @@
         	<td>{{ r.id }}</td>
         	<td>{{ r.album_name }}</td>
         	<td>{{ r.release_date }}</td>
-  	    	<td><input type="button" name = "Edit" value = "Edit" onclick = "window.location='/update_album/{{r.0}}'"></td>
-  	    	<td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_album/{{r.0}}'"></td>
+  	    	<td><input type="button" name = "Edit" value = "Edit" onclick = "window.location='/update_album/{{ r.id }}'"></td>
+  	    	<td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_album/{{ r.id }}'"></td>
   	    </tr>
   	  {% endfor %}
   	</tbody>	

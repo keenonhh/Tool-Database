@@ -58,7 +58,7 @@ def add_band_members():
 def add_shows():
     form = AddShowForm()
     if form.validate_on_submit():
-        show = Shows(city=form.city.data, set_list_id=form.set_list_id.data)
+        show = Shows(city=form.city.data)
         # add the user to database
         db.session.add(show)
         db.session.commit()
@@ -75,12 +75,12 @@ def add_set_list():
     form = AddSetList()
     
     # populate the list of choices with the cities and tracks availalbe
-    form.city.choices = [(show.set_list_id, show.city) for show in Shows.query.order_by('city')]
+    form.show_id.choices = [(show.id, show.city) for show in Shows.query.order_by('city')]
     form.track_name.choices = [(track.id, track.track_name) for track in Track.query.order_by('track_name')]
 
     if form.validate_on_submit():
         # use the track id to get the album id so a new setlist can be added
-        set_list = SetList(set_list_id=form.city.data, track_id=form.track_name.data, album_id=Track.query.get(form.track_name.data).album_id)
+        set_list = SetList(show_id=form.show_id.data, track_id=form.track_name.data)
         # add the user to database
         db.session.add(set_list)
         db.session.commit()

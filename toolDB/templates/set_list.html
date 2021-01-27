@@ -12,12 +12,12 @@
 		<tbody>
 		  {% for r in rows %}
 		  	<tr>
-			  <td>{{ r[1] }}</td>
+			  <td>{{ r[0] }}</td>
 			  <td>{{ r[2] }}</td>
 			  <td>{{ r[3] }}</td>
 			  <td>{{ r[4] }}</td>
 			  <td><input type="button" name = "Edit" value = "Edit" onclick = "window.location='/update_set_list/{{ r.id }}'"></td>
-			  <td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_set_list/{{ r.id }}'"></td>
+			  <td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_set_list/{{ r[0] }}'"></td>
 			</tr>
 		  {% endfor %}
 		</tbody>

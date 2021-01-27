@@ -1,3 +1,27 @@
+### INSERT FUNCTIONALITIES
+#   
+#
+##renders the add set list page which allows user to enter details about a new set list
+#@app.route('/add_set_list')
+#def add_set_list():
+#    db_connection = connect_to_database()
+#    query1 = 'SELECT `line up id`, `city` FROM `shows`';
+#    query2 = 'SELECT `track id`, `track name` FROM `tracks`';
+#    result_lineup = execute_query(db_connection, query1).fetchall();
+#    result_track = execute_query(db_connection, query2).fetchall();
+#    return render_template('add_set_list.html', lineup_id = result_lineup, track_id = result_track)
+#
+##inserts the new set list information entered by the user into the set list table and renders page which displays confirmation message to user
+#@app.route('/add_set_list_new', methods = ['POST', 'GET'])
+#def add_set_list_new():
+#    db_connection = connect_to_database()
+#    lineup_id = request.form['lineup_id']
+#    track_id = request.form['track_id']
+#    query = 'INSERT INTO `set list` (`line up id`, `track id`) VALUES (%s, %s)';
+#    data = (lineup_id, track_id)
+#    execute_query(db_connection, query, data)
+#    return render_template('add_set_list_new.html')    
+#
 ### SEARCH FUNCTION
 # 
 ##returns the results of the user's search by track id - information is displayed about the specified track from the tracks, shows, and band members tables 
@@ -105,6 +129,11 @@
 #        track_name = request.form['track_name']
 #        track_length = request.form['track_length']
 #        album_id = request.form['album_id']
+#        
+#        #if not on an album
+#        if album_id == "no_album":
+#            album_id = None
+#            
 #        data = (track_name, track_length, album_id, track_id)
 #
 #        query = "UPDATE `tracks` SET `track name` = %s, `track length` = %s, `album id` = %s WHERE `track id` = %s"
@@ -225,3 +254,7 @@
 #        result = execute_query(db_connection, query, data)
 #
 #        return redirect('/band_members')
+#    
+#if __name__ == '__main__':
+#    app.run(host='0.0.0.0', port=3975)
+#

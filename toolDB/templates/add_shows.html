@@ -15,20 +15,6 @@
         {{ form.city }}
       {% endif %}
     </div>
-    
-    <div class='form-control'>
-      {{ form.set_list_id.label }}
-      {% if form.set_list_id.errors %}
-        {{ form.set_list_id }}
-        <ul class=errors>
-        {% for error in form.set_list_id.errors %}
-          <li>{{ error }}</li>
-        {% endfor %}
-        </ul>
-      {% else %}
-        {{ form.set_list_id }}
-      {% endif %}
-    </div>
     {{ form.submit() }}
   </form>
 {% endblock content %}
