@@ -38,7 +38,7 @@ def shows():
 #renders the set list page and displays the set list table, along with the corresponding columns from the shows and tracks table, from the back-end database
 @select.route('/set_list')
 def set_list():
-    rows = db.session.execute('SELECT set_list.id, set_list.show_id, shows.city, set_list.track_id, track.track_name FROM set_list JOIN shows ON set_list.show_id = shows.id JOIN track ON set_list.track_id = track.id;')
+    rows = db.session.query(SetList, Track, Shows).filter(SetList.id == SetList.id).filter(SetList.show_id == Shows.id).filter(SetList.track_id == Track.id).all()
     return render_template('set_list.html', title='SetList', header='Set List table', rows=rows)
 
 #renders the track contributors page and displays the track band members table, along with the corresponding columns from the tracks and band members tables, from the back-end database 

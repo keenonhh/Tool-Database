@@ -59,6 +59,6 @@ def delete_set_list(id):
     set_list = SetList.query.filter_by(id=id).first()
     db.session.delete(set_list)
     db.session.commit()
-    rows = db.session.execute('SELECT set_list.id, set_list.show_id, shows.city, set_list.track_id, track.track_name FROM set_list JOIN shows ON set_list.show_id = shows.id JOIN track ON set_list.track_id = track.id;')
+    rows = db.session.query(SetList, Track, Shows).filter(SetList.id == SetList.id).filter(SetList.show_id == Shows.id).filter(SetList.track_id == Track.id).all()
     return render_template('set_list.html', title='Set List', header='Set List Table', rows=rows) 
 

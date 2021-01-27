@@ -1,37 +1,66 @@
-
-<table style="width:75%" table border="1" table align = "center">
-  <thead>
-    <th>Track ID</th>
-    <th>Track Name</th>
-    <th>Track Length</th>
-    <th>Album ID</th>
-  </thead>
-  <tbody>
-	{% for r in row %}
-	<tr>
-		<td>{{r.0}}</td>
-		<td>{{r[1]}}</td>
-		<td>{{r[2]}}</td>
-		<td>{{r[3]}}</td>
-	</tr>
-		{% endfor %}
-	</tbody>
-</table>
-<br>
-<form method="POST" action="/update_track/{{track.0}}">
-    <input type="hidden" name="track_id" value = "{{track.0}}">
-	Track Name <input type="text" name="track_name" value = "{{track[1]}}" required />
-    <br>
-    Track Length <input type="number" step = "0.01" min = "0" name="track_length" value = "{{track[2]}}" required />
-    <br>
-	Album ID <select name="album_id" >
-		{% for A in albums %}	
-			<option class = "dropdown" value = "{{A[0]}}">{{A[0]}}</option>
-		{% endfor %}
-	</select>	
-    <br>
+{% extends "layout.html" %}
+{% block content %}
+	<table style="width:75%" table border="1" table align = "center">
+	  <thead>
+	    <th>Track ID</th>
+	    <th>Track Name</th>
+	    <th>Track Length</th>
+	    <th>Album ID</th>
+	  </thead>
+	  <tbody>
+		<tr>
+			<td>{{ row.id }}</td>
+			<td>{{ row.track_name }}</td>
+			<td>{{ row.track_length }}</td>
+			<td>{{ row.album_id }}</td>
+		</tr>
+		</tbody>
+	</table>
 	<br>
-	<input type="submit">
-  </form>
- </body>
- <html>
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+	    <div class='form-control'>
+	      {{ form.track_name.label }}
+	      {% if form.track_name.errors %}
+	        {{ form.track_name }}
+	        <ul class=errors>
+	        {% for error in form.track_name.errors %}
+	          <li>{{ error }}</li>
+	        {% endfor %}
+	        </ul>
+	      {% else %}
+	        {{ form.track_name }}
+	      {% endif %}
+	    </div>
+	
+	    <div class='form-control'>
+	      {{ form.track_length.label }}
+	      {% if form.track_length.errors %}
+	        {{ form.track_length }}
+	        <ul class=errors>
+	        {% for error in form.track_length.errors %}
+	          <li>{{ error }}</li>
+	        {% endfor %}
+	        </ul>
+	      {% else %}
+	        {{ form.track_length }}
+	      {% endif %}
+	    </div>
+	
+	    <div class='form-control'>
+	      {{ form.album_id.label }}
+	      {% if form.album_id.errors %}
+	        {{ form.album_id }}
+	        <ul class=errors>
+	        {% for error in form.album_id.errors %}
+	          <li>{{ error }}</li>
+	        {% endfor %}
+	        </ul>
+	      {% else %}
+	        {{ form.album_id }}
+	      {% endif %}
+	    </div>
+
+		{{ form.submit() }}
+	</form>
+{% endblock content %}

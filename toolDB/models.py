@@ -39,7 +39,7 @@ class Track(db.Model):
     set_list_track = db.relationship('SetList', cascade='all, delete', backref='track', lazy=True)
 
     def __repr__(self):
-        return f"track('{self.track_name}', '{self.track_length}')"
+        return f"track('{self.track_name}', '{self.track_length}', '{self.album_id}')"
 
 # Table of Tool members
 class Member(db.Model):
@@ -72,7 +72,7 @@ class Shows(db.Model):
     set_list_show = db.relationship('SetList', cascade='all, delete', backref='shows', lazy=True)
 
     def __repr__(self):
-        return f"show('{self.city}', '{self.set_list_id}')"
+        return f"show('{self.id}','{self.city}')"
 
 # Table of Tool shows
 class SetList(db.Model):
@@ -84,4 +84,4 @@ class SetList(db.Model):
     track_id = db.Column(db.Integer, db.ForeignKey('track.id'), nullable=False)
 
     def __repr__(self):
-        return f"setlist('{self.album_id}', '{self.track_id}')"
+        return f"setlist('{self.show_id}', '{self.track_id}')"

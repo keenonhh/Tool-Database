@@ -1,32 +1,29 @@
-
-<table style="width:75%" table border="1" table align = "center">
-  <thead>
-    <th>Line Up ID</th>
-	<th>Show City</th>
-    <th>Track ID</th>
-	<th>Track Name</th>
-  </thead>
-  <tbody>
-	{% for r in row %}
-	<tr>
-		<td>{{r[1]}}</td>
-		<td>{{r[2]}}</td>
-		<td>{{r[3]}}</td>
-		<td>{{r[4]}}</td>
-  </tr>
-	{% endfor %}
-</tbody>
-</table>
-<br>
- <form method="POST" action="/update_set_list/{{setlist.0}}">
- <input type="hidden" name="setlist_id" value = "{{setlist.0}}">
-	Track Name <select name="track_id">
-       {% for t in track_id %}
-         <option value="{{t[0]}}">{{t[1]}}</option>
-       {% endfor %}
-	</select><br>
+{% extends "layout.html" %}
+{% block content %}
+	<table style="width:75%" table border="1" table align = "center">
+	  <thead>
+	    <th>Set List ID</th>
+		<th>Show City</th>
+	    <th>Track ID</th>
+		<th>Track Name</th>
+	  </thead>
+	  <tbody>
+		<tr>
+			<td>{{ row[0].id }}</td>
+			<td>{{ row[2].city }}</td>
+			<td>{{ row[1].id }}</td>
+			<td>{{ row[1].track_name }}</td>
+	  	</tr>
+	</tbody>
+	</table>
 	<br>
-    <input type="submit">
-  </form>
- </body>
- <html>
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+		<div class='form-control'>
+			{{ form.track_name.label }}
+			{{ form.track_name }}
+		</div>
+
+		{{ form.submit() }}
+	</form>
+{% endblock content %}

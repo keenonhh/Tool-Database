@@ -1,27 +1,50 @@
-<table style="width:75%" table border="1" table align = "center">
-  <thead>
-    <th>Album ID</th>
-    <th>Album Name</th>
-    <th>Release Date</th>
-  </thead>
-  <tbody>
-	{% for r in row %}
-	<tr>
-		<td>{{r.0}}</td>
-		<td>{{r[1]}}</td>
-		<td>{{r[2]}}</td>
-	</tr>
-	{% endfor %}
-	</tbody>	
-</table>
-<br>
-<form method="POST" action="/update_album/{{album.0}}">
-	<input type="hidden" name="album_id" value = "{{album.0}}">
-    Album Name <input type="text" name="album_name" value = "{{album[1]}}" required />
-    <br>
-	Release Date <input type="date" name="release_date" value = "{{album[2]}}"required />
+{% extends "layout.html" %}
+{% block content %}
+	<table style="width:75%" table border="1" table align = "center">
+	  <thead>
+	    <th>Album ID</th>
+	    <th>Album Name</th>
+	    <th>Release Date</th>
+	  </thead>
+	  <tbody>
+		<tr>
+			<td>{{ row.id }}</td>
+			<td>{{ row.album_name }}</td>
+			<td>{{ row.release_date }}</td>
+		</tr>
+	   </tbody>
+	</table>
 	<br>
-	<input type="submit">
-  </form>
- </body>
- <html>
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+	    <div class='form-control'>
+	      {{ form.album_name.label }}
+	      {% if form.album_name.errors %}
+	        {{ form.album_name }}
+	        <ul class=errors>
+	        {% for error in form.album_name.errors %}
+	          <li>{{ error }}</li>
+	        {% endfor %}
+	        </ul>
+	      {% else %}
+	        {{ form.album_name }}
+	      {% endif %}
+	    </div>
+	
+	    <div class='form-control'>
+	      {{ form.release_date.label }}
+	      {% if form.release_date.errors %}
+	        {{ form.release_date }}
+	        <ul class=errors>
+	        {% for error in form.release_date.errors %}
+	          <li>{{ error }}</li>
+	        {% endfor %}
+	        </ul>
+	      {% else %}
+	        {{ form.release_date }}
+	      {% endif %}
+	    </div>
+
+		{{ form.submit() }}
+	</form>
+{% endblock content %}

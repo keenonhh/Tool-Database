@@ -1,31 +1,66 @@
-<table style="width:75%" table border="1" table align = "center">
-  <thead>
-	<th>Band Member ID</th>
-    <th>Name</th>
-    <th>Instrument</th>
-    <th>Birthdate</th>
-  </thead>
-  <tbody>
-	{% for r in row %}
-	<tr>
-		<td>{{r.0}}</td>
-		<td>{{r[1]}}</td>
-		<td>{{r[2]}}</td>
-		<td>{{r[3]}}</td>
-	</tr>
-		{% endfor %}
-	</tbody>
-</table>	
-<br>
-<form method="POST" action="/update_member/{{member.0}}">
-    <input type="hidden" name="member_id" value = "{{member.0}}">
-	Band Member Name <input type="text" name="member_name" value = "{{member[1]}}" required />
-    <br>
-    Instrument <input type="text" name="instrument" value = "{{member[2]}}" required />
+{% extends "layout.html" %}
+{% block content %}
+	<table style="width:75%" table border="1" table align = "center">
+	  <thead>
+		<th>Band Member ID</th>
+		<th>Name</th>
+		<th>Instrument</th>
+		<th>Birthdate</th>
+	  </thead>
+	  <tbody>
+		<tr>
+			<td>{{ row.id }}</td>
+			<td>{{ row.member_name }}</td>
+			<td>{{ row.instrument }}</td>
+			<td>{{ row.birthdate }}</td>
+		</tr>
+	   </tbody>
+	</table>
 	<br>
-	Birthdate <input type="date" name="birthdate" value = "{{member[3]}}" required />
-	<br>
-	<input type="submit">
-  </form>
- </body>
- <html>
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+	    <div class='form-control'>
+	      {{ form.member_name.label }}
+	      {% if form.member_name.errors %}
+	        {{ form.member_name }}
+	        <ul class=errors>
+	        {% for error in form.member_name.errors %}
+	          <li>{{ error }}</li>
+	        {% endfor %}
+	        </ul>
+	      {% else %}
+	        {{ form.member_name }}
+	      {% endif %}
+	    </div>
+	
+	    <div class='form-control'>
+	      {{ form.instrument.label }}
+	      {% if form.instrument.errors %}
+	        {{ form.instrument }}
+	        <ul class=errors>
+	        {% for error in form.instrument.errors %}
+	          <li>{{ error }}</li>
+	        {% endfor %}
+	        </ul>
+	      {% else %}
+	        {{ form.instrument }}
+	      {% endif %}
+		</div>
+		
+		<div class='form-control'>
+			{{ form.birthdate.label }}
+			{% if form.birthdate.errors %}
+			  {{ form.birthdate }}
+			  <ul class=errors>
+			  {% for error in form.birthdate.errors %}
+				<li>{{ error }}</li>
+			  {% endfor %}
+			  </ul>
+			{% else %}
+			  {{ form.birthdate }}
+			{% endif %}
+		  </div>
+
+		{{ form.submit() }}
+	</form>
+{% endblock content %}
