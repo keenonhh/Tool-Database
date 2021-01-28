@@ -27,12 +27,12 @@ class AddShowForm(FlaskForm):
     # only allow an user to add an existing setlist
     submit = SubmitField('Add Show')
 
-class AddSetList(FlaskForm):
+class AddSetListForm(FlaskForm):
     show_id = SelectField('City', validators=[DataRequired()])
     track_name = SelectField('Track Name', validators=[DataRequired()])
     submit = SubmitField('Add Set List')
 
-class AddTrackContributor(FlaskForm):
+class AddTrackContributorFrom(FlaskForm):
     track_name = SelectField('Track Name', validators=[DataRequired()])
     member = SelectField('Band Member Name', validators=[DataRequired()])
     submit = SubmitField('Add Track Contributor')

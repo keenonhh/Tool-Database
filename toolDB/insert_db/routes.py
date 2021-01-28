@@ -1,5 +1,5 @@
 from flask import render_template, request, Blueprint, redirect, url_for, flash
-from toolDB.insert_db.forms import AddAlbumForm, AddTrackForm, AddMemberForm, AddShowForm, AddSetList, AddTrackContributor
+from toolDB.insert_db.forms import AddAlbumForm, AddTrackForm, AddMemberForm, AddShowForm, AddSetListForm, AddTrackContributorForm
 from toolDB import db
 from toolDB.models import Album, Track, Member, Shows, SetList, trackBandMember
 
@@ -13,7 +13,7 @@ def add_album():
     form = AddAlbumForm()
     if form.validate_on_submit():
         album = Album(album_name=form.album_name.data, release_date=form.release_date.data)
-        # add the user to database
+        # add the album to database
         db.session.add(album)
         db.session.commit()
         # success message 
@@ -28,7 +28,7 @@ def add_track():
     form = AddTrackForm()
     if form.validate_on_submit():
         track = Track(track_name=form.track_name.data, track_length=form.track_length.data, album_id=form.album_id.data)
-        # add the user to database
+        # add the track to database
         db.session.add(track)
         db.session.commit()
         # success message 
@@ -44,7 +44,7 @@ def add_band_members():
     form = AddMemberForm()
     if form.validate_on_submit():
         member = Member(member_name=form.member_name.data, instrument=form.instrument.data, birthdate=form.birthdate.data)
-        # add the user to database
+        # add the member to database
         db.session.add(member)
         db.session.commit()
         # success message 
@@ -59,7 +59,7 @@ def add_shows():
     form = AddShowForm()
     if form.validate_on_submit():
         show = Shows(city=form.city.data)
-        # add the user to database
+        # add the show to database
         db.session.add(show)
         db.session.commit()
         # success message 
@@ -72,7 +72,7 @@ def add_shows():
 #renders the add set list page which allows user to enter details about a new set list
 @insert.route('/add_set_list', methods=['GET','POST'])
 def add_set_list():
-    form = AddSetList()
+    form = AddSetListForm()
     
     # populate the list of choices with the cities and tracks availalbe
     form.show_id.choices = [(show.id, show.city) for show in Shows.query.order_by('city')]
@@ -81,7 +81,7 @@ def add_set_list():
     if form.validate_on_submit():
         # use the track id to get the album id so a new setlist can be added
         set_list = SetList(show_id=form.show_id.data, track_id=form.track_name.data)
-        # add the user to database
+        # add the set list to database
         db.session.add(set_list)
         db.session.commit()
         # success message 
@@ -94,7 +94,7 @@ def add_set_list():
 #renders the add track contributor page which allows user to enter details about a new track contributor
 @insert.route('/add_track_contributors', methods=['GET','POST'])
 def add_track_contributors():
-    form = AddTrackContributor()
+    form = AddTrackContributorForm()
 
     # populate the list of choices with the track names and member names
     form.track_name.choices = [(track.id, track.track_name) for track in Track.query.order_by('track_name')]
@@ -104,7 +104,7 @@ def add_track_contributors():
         # statement that will insert into many to many associative table
         # track_id and member_name from form will be inserted upon execution and commit
         track_contributor = trackBandMember.insert().values(track_id=form.track_name.data, member_id=form.member.data)
-        # add the user to database
+        # add the track contributor to database
         db.session.execute(track_contributor)
         db.session.commit()
         # success message 

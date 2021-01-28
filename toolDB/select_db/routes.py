@@ -21,8 +21,10 @@ def album():
 #renders the track page and displays the tracks table from the back-end database
 @select.route('/track', methods = ['GET', 'POST'])
 def track():
+    # form for the search field
     form = SearchForm()
     rows = Track.query.all()
+    # if a valid search is performed send the track id that was searched for to the search function
     if form.validate_on_submit():
         id = form.track_id.data
         # redirect to search page 
@@ -53,8 +55,7 @@ def track_contributors():
     rows = db.session.execute('SELECT trackBandMember.id, trackBandMember.track_id, track.track_name, trackBandMember.member_id, member.member_name FROM trackBandMember JOIN track ON trackBandMember.track_id = track.id JOIN member ON trackBandMember.member_id = member.id;')
     return render_template('track_contributors.html', title='Track Contributors', header='Track Contributors', rows=rows)
 
-
-
+# Search functionality is essentially just selecting from the database
 @select.route("/search/<int:id>", methods = ['GET', 'POST'])
 def search(id):
     rows = db.session.query(Track, Member, Shows, SetList).filter(Track.id == id).filter(trackBandMember.c.track_id == Track.id).filter(Member.id == trackBandMember.c.id).filter(SetList.track_id == id).filter(Shows.id == SetList.show_id).all()   
