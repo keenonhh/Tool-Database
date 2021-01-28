@@ -18,7 +18,7 @@ def add_album():
         db.session.commit()
         # success message 
         flash(f'Album has been added!', 'success')
-        # redirect to lifts page 
+        # redirect to album page 
         return redirect(url_for('select.album'))
     return render_template('add_album.html', title='Add Album', header='Add Album', form=form)
 
@@ -34,7 +34,7 @@ def add_track():
         # success message 
         flash(f'Track has been added!', 'success')
         flash(f"Don't forget to add the track's contributing band member(s) under Track Contributors!", 'message')
-        # redirect to lifts page 
+        # redirect to track page 
         return redirect(url_for('select.track'))
     return render_template('add_track.html', title='Add Track', header='Add track', form=form)  
      
@@ -49,7 +49,7 @@ def add_band_members():
         db.session.commit()
         # success message 
         flash(f'Member has been added!', 'success')
-        # redirect to lifts page 
+        # redirect to members page 
         return redirect(url_for('select.band_members'))
     return render_template('add_members.html', title='Add Member', header='Add Member', form=form) 
 
@@ -64,7 +64,7 @@ def add_shows():
         db.session.commit()
         # success message 
         flash(f'Show has been added!', 'success')
-        # redirect to lifts page 
+        # redirect to shows page 
         return redirect(url_for('select.shows'))
     return render_template('add_shows.html', title='Add Shows', header='Add Shows', form=form)
   
@@ -86,7 +86,7 @@ def add_set_list():
         db.session.commit()
         # success message 
         flash(f'Set list has been added!', 'success')
-        # redirect to lifts page 
+        # redirect to set list page 
         return redirect(url_for('select.set_list'))
     return render_template('add_set_list.html', title='Add to a Setlist', header='Add to a Setlist', form=form)
 
@@ -109,7 +109,7 @@ def add_track_contributors():
         db.session.commit()
         # success message 
         flash(f'Track Contributor has been added!', 'success')
-        # redirect to lifts page 
+        # redirect to track contributors page 
         return redirect(url_for('select.track_contributors'))
     return render_template('add_track_contributors.html', title='Add Track Contributor', header='Add Track Contributor', form=form)
 

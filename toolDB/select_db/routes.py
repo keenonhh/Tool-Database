@@ -1,5 +1,6 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, redirect, url_for
 from toolDB import db
+from toolDB.select_db.forms import SearchForm
 from toolDB.models import Album, Track, Member, Shows, SetList, trackBandMember
 
 select = Blueprint('select', __name__)
@@ -18,10 +19,15 @@ def album():
     return render_template('album.html', title='Album', header='Album Table', rows=rows)
 
 #renders the track page and displays the tracks table from the back-end database
-@select.route('/track')
+@select.route('/track', methods = ['GET', 'POST'])
 def track():
-    rows = Track.query.all()  
-    return render_template('track.html', title='Track', header='Track Table', rows=rows)
+    form = SearchForm()
+    rows = Track.query.all()
+    if form.validate_on_submit():
+        id = form.track_id.data
+        # redirect to search page 
+        return redirect(url_for('select.search', id=id))
+    return render_template('track.html', title='Track', header='Track Table', rows=rows, form=form)
 
 #renders the band members page and displays the band members table from the back-end database
 @select.route('/band_members')
@@ -46,3 +52,10 @@ def set_list():
 def track_contributors():
     rows = db.session.execute('SELECT trackBandMember.id, trackBandMember.track_id, track.track_name, trackBandMember.member_id, member.member_name FROM trackBandMember JOIN track ON trackBandMember.track_id = track.id JOIN member ON trackBandMember.member_id = member.id;')
     return render_template('track_contributors.html', title='Track Contributors', header='Track Contributors', rows=rows)
+
+
+
+@select.route("/search/<int:id>", methods = ['GET', 'POST'])
+def search(id):
+    rows = db.session.query(Track, Member, Shows, SetList).filter(Track.id == id).filter(trackBandMember.c.track_id == Track.id).filter(Member.id == trackBandMember.c.id).filter(SetList.track_id == id).filter(Shows.id == SetList.show_id).all()   
+    return render_template('results.html', title='Search Results', header='Search Results', rows=rows)

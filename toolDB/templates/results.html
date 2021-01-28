@@ -1,24 +1,28 @@
-<table style="width:75%" table border="1" table align = "center">
-  <thead>
-    <th>Track ID</th>
-    <th>Track Name</th>
-    <th>Track Length</th>
-    <th>Album ID</th>
-	<th>Contributing Band Members</th>
-	<th>Line Up ID</th>
-	<th>Show City</th>
-  </thead>
-  <tbody>
-	{% for r in results %}
-	<tr>
-		<td>{{r.0}}</td>
-		<td>{{r[1]}}</td>
-		<td>{{r[2]}}</td>
-		<td>{{r[3]}}</td>
-		<td>{{r[4]}}</td>
-		<td>{{r[5]}}</td>
-		<td>{{r[6]}}</td>
-	</tr>
+{% extends "layout.html" %}
+{% block content %}
+	<table style="width:75%" table border="1" table align = "center">
+	  <thead>
+	    <th>Track ID</th>
+	    <th>Track Name</th>
+	    <th>Track Length</th>
+	    <th>Album ID</th>
+		<th>Contributing Band Members</th>
+		<th>Set List ID</th>
+		<th>Show City</th>
+	  </thead>
+	  <tbody>
+		{% for r in rows %}
+			<tr>
+				<td>{{ r[0].id }}</td>
+				<td>{{ r[0].track_name }}</td>
+				<td>{{ r[0].track_length }}</td>
+				<td>{{ r[0].album_id }}</td>
+				<td>{{ r[1].member_name }}</td>
+				<td>{{ r[2].id }}</td>
+				<td>{{ r[2].city }}</td>
+
+			</tr>
 		{% endfor %}
-	</tbody>
-</table>
+	   </tbody>
+	</table>
+{% endblock content %}

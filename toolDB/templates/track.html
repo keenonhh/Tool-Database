@@ -29,9 +29,21 @@
 	<br>
 		<p>Use the search function below to retrieve Set List, Show information etc for a particular Track </p>
 	<br>
-	<br>
-		<form method="POST" action="/search"> Search by Track ID <input type="text" name="Search" />
-		<button type="submit">Search</i></button>
-		</form>
-	<br>
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+		<div class='form-control'>
+		  {{ form.track_id.label }}
+		  {% if form.track_id.errors %}
+			{{ form.track_id }}
+			<ul class=errors>
+			{% for error in form.track_id.errors %}
+			  <li>{{ error }}</li>
+			{% endfor %}
+			</ul>
+		  {% else %}
+			{{ form.track_id }}
+		  {% endif %}
+		</div>
+		{{ form.submit() }}
+	  </form>
 {% endblock content %}
