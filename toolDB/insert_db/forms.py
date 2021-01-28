@@ -32,7 +32,7 @@ class AddSetListForm(FlaskForm):
     track_name = SelectField('Track Name', validators=[DataRequired()])
     submit = SubmitField('Add Set List')
 
-class AddTrackContributorFrom(FlaskForm):
+class AddTrackContributorForm(FlaskForm):
     track_name = SelectField('Track Name', validators=[DataRequired()])
     member = SelectField('Band Member Name', validators=[DataRequired()])
     submit = SubmitField('Add Track Contributor')
