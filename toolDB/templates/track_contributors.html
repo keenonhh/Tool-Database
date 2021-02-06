@@ -11,10 +11,10 @@
 		<tbody>
 		  {% for r in rows %}
 		  	<tr>
-				<td>{{ r[1] }}</td>
-				<td>{{ r[2] }}</td>
-				<td>{{ r[3] }}</td>
-				<td>{{ r[4] }}</td>
+				<td>{{ r[0].id }}</td>
+				<td>{{ r[0].track_name }}</td>
+				<td>{{ r[1].id }}</td>
+				<td>{{ r[1].member_name }}</td>
 				<td><input type="button" name = "Delete" value = "Delete" onclick = "window.location='/delete_contributor/{{r.0}}'"></td>
 		  	</tr>
 		  {% endfor %}

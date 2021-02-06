@@ -7,7 +7,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = '44680751eec5557106024cfaba4f817b'
 
 # set up database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Khawk852!@localhost/Tool'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 #import all the blueprints 
@@ -21,7 +22,3 @@ app.register_blueprint(select)
 app.register_blueprint(insert)
 app.register_blueprint(delete)
 app.register_blueprint(update)
-
-
-
-

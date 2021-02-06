@@ -52,7 +52,7 @@ def set_list():
 #renders the track contributors page and displays the track band members table, along with the corresponding columns from the tracks and band members tables, from the back-end database 
 @select.route('/track_contributors')
 def track_contributors():
-    rows = db.session.execute('SELECT trackBandMember.id, trackBandMember.track_id, track.track_name, trackBandMember.member_id, member.member_name FROM trackBandMember JOIN track ON trackBandMember.track_id = track.id JOIN member ON trackBandMember.member_id = member.id;')
+    rows = db.session.query(Track, Member).filter(Member.id == trackBandMember.c.member_id).filter(Track.id == trackBandMember.c.track_id).all()
     return render_template('track_contributors.html', title='Track Contributors', header='Track Contributors', rows=rows)
 
 # Search functionality is essentially just selecting from the database

@@ -30,7 +30,7 @@ class Track(db.Model):
 
     # album id is a foreign key column in this table indicating which tracks
     # are on which album
-    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=False)
+    album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=True)
 
     # there is a relationship which band member(s) wrote which tracks (many to many)
     member_track = db.relationship('Member', secondary='trackBandMember', backref='track', lazy=True)
