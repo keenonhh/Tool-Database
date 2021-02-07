@@ -1,13 +1,14 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 
 # secret key for use in wtforms
-app.config['SECRET_KEY'] = '44680751eec5557106024cfaba4f817b'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 # set up database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:Khawk852!@localhost/Tool'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
