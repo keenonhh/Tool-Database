@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField, FloatField, SelectField
 from wtforms.validators import DataRequired, Length, NumberRange
-from toolDB.models import Album, Track, Member, Shows, SetList, trackBandMember
+from toolDB.models import Album, Track, Member, Shows, Setlist, trackbandmember
 
 # Form to add an album to database
 class AddAlbumForm(FlaskForm):
@@ -24,10 +24,10 @@ class AddMemberForm(FlaskForm):
 
 class AddShowForm(FlaskForm):
     city = StringField('City', validators=[DataRequired(), Length(min=2, max=20)])
-    # only allow an user to add an existing setlist
+    # only allow an user to add an existing Setlist
     submit = SubmitField('Add Show')
 
-class AddSetListForm(FlaskForm):
+class AddSetlistForm(FlaskForm):
     show_id = SelectField('City', validators=[DataRequired()])
     track_name = SelectField('Track Name', validators=[DataRequired()])
     submit = SubmitField('Add Set List')

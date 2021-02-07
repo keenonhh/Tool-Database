@@ -1,7 +1,7 @@
 from flask import render_template, request, Blueprint, redirect, url_for, flash
-from toolDB.update_db.forms import UpdateAlbumForm, UpdateTrackForm, UpdateMemberForm, UpdateShowForm, UpdateSetListForm
+from toolDB.update_db.forms import UpdateAlbumForm, UpdateTrackForm, UpdateMemberForm, UpdateShowForm, UpdateSetlistForm
 from toolDB import db
-from toolDB.models import Album, Track, Member, Shows, SetList
+from toolDB.models import Album, Track, Member, Shows, Setlist
 
 update = Blueprint('update', __name__)
 
@@ -28,9 +28,9 @@ def update_tracks(id):
 #update set list table
 @update.route('/update_set_list/<int:id>', methods=['POST','GET'])
 def update_set_list(id):
-    form = UpdateSetListForm()
+    form = UpdateSetlistForm()
     # display the selected row on the update page
-    row = db.session.query(SetList, Track, Shows).filter(SetList.id==id).filter(SetList.show_id == Shows.id).filter(SetList.track_id == Track.id).first()
+    row = db.session.query(Setlist, Track, Shows).filter(Setlist.id==id).filter(Setlist.show_id == Shows.id).filter(Setlist.track_id == Track.id).first()
     
     # choices for form drop down
     form.track_name.choices = [(track.id, track.track_name) for track in Track.query.order_by('track_name')]
@@ -38,7 +38,7 @@ def update_set_list(id):
     # submit the update form
     if form.validate_on_submit():
         # update the selected row with the values from the form
-        SetList.query.filter_by(id=id).update({'track_id':form.track_name.data})
+        Setlist.query.filter_by(id=id).update({'track_id':form.track_name.data})
         db.session.commit()
         # success message 
         flash(f'Set List has been updated!', 'success')

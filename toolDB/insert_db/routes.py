@@ -1,7 +1,7 @@
 from flask import render_template, request, Blueprint, redirect, url_for, flash
-from toolDB.insert_db.forms import AddAlbumForm, AddTrackForm, AddMemberForm, AddShowForm, AddSetListForm, AddTrackContributorForm
+from toolDB.insert_db.forms import AddAlbumForm, AddTrackForm, AddMemberForm, AddShowForm, AddSetlistForm, AddTrackContributorForm
 from toolDB import db
-from toolDB.models import Album, Track, Member, Shows, SetList, trackBandMember
+from toolDB.models import Album, Track, Member, Shows, Setlist, trackbandmember
 
 insert = Blueprint('insert', __name__)
 
@@ -72,15 +72,15 @@ def add_shows():
 #renders the add set list page which allows user to enter details about a new set list
 @insert.route('/add_set_list', methods=['GET','POST'])
 def add_set_list():
-    form = AddSetListForm()
+    form = AddSetlistForm()
     
     # populate the list of choices with the cities and tracks availalbe
     form.show_id.choices = [(show.id, show.city) for show in Shows.query.order_by('city')]
     form.track_name.choices = [(track.id, track.track_name) for track in Track.query.order_by('track_name')]
 
     if form.validate_on_submit():
-        # use the track id to get the album id so a new setlist can be added
-        set_list = SetList(show_id=form.show_id.data, track_id=form.track_name.data)
+        # use the track id to get the album id so a new Setlist can be added
+        set_list = Setlist(show_id=form.show_id.data, track_id=form.track_name.data)
         # add the set list to database
         db.session.add(set_list)
         db.session.commit()
@@ -103,7 +103,7 @@ def add_track_contributors():
     if form.validate_on_submit():
         # statement that will insert into many to many associative table
         # track_id and member_name from form will be inserted upon execution and commit
-        track_contributor = trackBandMember.insert().values(track_id=form.track_name.data, member_id=form.member.data)
+        track_contributor = trackbandmember.insert().values(track_id=form.track_name.data, member_id=form.member.data)
         # add the track contributor to database
         db.session.execute(track_contributor)
         db.session.commit()

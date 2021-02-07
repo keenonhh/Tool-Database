@@ -33,10 +33,10 @@ class Track(db.Model):
     album_id = db.Column(db.Integer, db.ForeignKey('album.id'), nullable=True)
 
     # there is a relationship which band member(s) wrote which tracks (many to many)
-    member_track = db.relationship('Member', secondary='trackBandMember', backref='track', lazy=True)
+    member_track = db.relationship('Member', secondary='trackbandmember', backref='track', lazy=True)
 
-    # relationship between setlist and track
-    set_list_track = db.relationship('SetList', cascade='all, delete', backref='track', lazy=True)
+    # relationship between Setlist and track
+    set_list_track = db.relationship('Setlist', cascade='all, delete', backref='track', lazy=True)
 
     def __repr__(self):
         return f"track('{self.track_name}', '{self.track_length}', '{self.album_id}')"
@@ -56,8 +56,7 @@ class Member(db.Model):
 
 # associative table between tracks and members that represents 
 # the many to many relationship
-trackBandMember = db.Table('trackBandMember',
-    db.Column('id', db.Integer, primary_key=True),
+trackbandmember = db.Table('trackbandmember',
     db.Column('track_id', db.Integer, db.ForeignKey('track.id')),
     db.Column('member_id', db.Integer, db.ForeignKey('member.id'))
 )
@@ -68,14 +67,14 @@ class Shows(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String, nullable=False)
     
-    # relationship between setlist and track
-    set_list_show = db.relationship('SetList', cascade='all, delete', backref='shows', lazy=True)
+    # relationship between Setlist and track
+    set_list_show = db.relationship('Setlist', cascade='all, delete', backref='shows', lazy=True)
 
     def __repr__(self):
         return f"show('{self.id}','{self.city}')"
 
 # Table of Tool shows
-class SetList(db.Model):
+class Setlist(db.Model):
     # primary key
     id = db.Column(db.Integer, primary_key=True)
 
