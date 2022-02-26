@@ -9,7 +9,7 @@ class Album(db.Model):
 
     # album info
     album_name = db.Column(db.String, nullable=False)
-    release_date = db.Column(db.Date, nullable=False)
+    release_date = db.Column(db.String, nullable=False)
     
     # there is a relationship which is album contains many tracks
     # and tracks come from a single album (many to one)
