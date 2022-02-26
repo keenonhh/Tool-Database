@@ -6,7 +6,7 @@ from toolDB.models import Album, Track, Member, Shows, Setlist, trackbandmember
 # Form to add an album to database
 class AddAlbumForm(FlaskForm):
     album_name = StringField('Album Name', validators=[DataRequired(), Length(min=2, max=20)])
-    release_date = DateField('Release Date', validators=[DataRequired(), Length(min=2, max=20)])
+    release_date = DateField('Release Date', validators=[DataRequired()], format="'%m/%d/%Y'")
     submit = SubmitField('Add Album')
 
 class AddTrackForm(FlaskForm):
@@ -19,7 +19,7 @@ class AddTrackForm(FlaskForm):
 class AddMemberForm(FlaskForm):
     member_name = StringField('Member Name', validators=[DataRequired(), Length(min=2, max=20)])
     instrument = StringField('Instrument', validators=[DataRequired(), Length(min=2, max=20)])
-    birthdate = DateField('Birthdate', validators=[DataRequired(), Length(min=2, max=20)])
+    birthdate = DateField('Birthdate', validators=[DataRequired()], format="'%m/%d/%Y'")
     submit = SubmitField('Add Member')
 
 class AddShowForm(FlaskForm):
